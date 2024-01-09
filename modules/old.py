@@ -1,7 +1,7 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
 import asyncio
-from utils.misc import prefix, openai_key
+from utils.misc import prefix
 from utils.scripts import modules_help
 from pyrogram.handlers import MessageHandler
 import random as r
@@ -74,7 +74,7 @@ async def prussian_cmd(_, message: Message):
 h_hearts = MessageHandler(hearts,filters.command('hearts',prefix) & filters.me)
 h_rib = MessageHandler(rib,filters.command('rib',prefix) & filters.me)
 h_roll = MessageHandler(roll,filters.command('roll',prefix) & filters.me)
-h_dot = MessageHandler(dot,filters.command('.',prefix) & filters.me)
+h_dot = MessageHandler(dot,filters.command('dot',prefix) & filters.me)
 h_try = MessageHandler(trry,filters.command('try',prefix) & filters.me)
 h_prus = MessageHandler(prussian_cmd,filters.command('prus',prefix) & filters.me)
 

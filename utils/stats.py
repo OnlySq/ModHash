@@ -1,6 +1,5 @@
 import time
 from datetime import datetime as dt, timedelta
-from platform import node
 from struct import unpack
 from winreg import OpenKeyEx, QueryValueEx, HKEY_LOCAL_MACHINE, QueryInfoKey, EnumKey, KEY_READ
 
@@ -114,42 +113,6 @@ def hdd_ssd_winreg():
             except FileNotFoundError:
                 continue
     return hdd_ssd_info if hdd_ssd_info else False
-
-
-# CD-ROM
-def cdrom_winreg():
-    disks = dict()
-    loc = r"SYSTEM\CurrentControlSet\Services\cdrom\Enum"
-    cd_rom = OpenKeyEx(HKEY_LOCAL_MACHINE, loc)
-    count = QueryValueEx(cd_rom, 'Count')[0]
-    if count > 0:
-        for num in range(count):
-            try:
-                ven = QueryValueEx(cd_rom, f'{num}')[0].split("&")[1].split("_")[1]
-            except Exception:
-                ven = None
-            try:
-                prod = " ".join(QueryValueEx(cd_rom, f'{num}')[0].split("&")[2].split("_")[1:])
-            except Exception:
-                prod = None
-            try:
-                rev = QueryValueEx(cd_rom, f'{num}')[0].split("&")[3].split("_")[1].split("\\")[0]
-            except Exception:
-                rev = None
-            try:
-                serial = QueryValueEx(cd_rom, f'{num}')[0].split("&")[6]
-            except Exception:
-                serial = None
-
-            disks.update({num: {
-                "Vendor": ven,
-                "Product": prod,
-                "Revision": rev,
-                "SerialNumber": serial
-            }})
-        return disks if disks else False
-    return False
-
 
 # Network Interface
 def nic_winreg():
@@ -268,8 +231,6 @@ def get_system() -> str:
         result += print_wmic("\n```GPU\n", gpu_info)
     if drive_info := hdd_ssd_winreg():
         result += print_wmic("\n```Data\n", drive_info)
-    if cd_rom_info := cdrom_winreg():
-        result += print_wmic("\n```CD\n", cd_rom_info)
     if nic_info := nic_winreg():
         result += print_wmic("\n```WEB\n", nic_info)
     return result

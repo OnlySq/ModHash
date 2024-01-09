@@ -10,7 +10,7 @@ class start:
                 os.mkdir(folder)
             except:
                 print(tag.folder+'Не удалось создать '+folder+', возможно папка уже существует')
-                pass
+                continue
         #os.system('cls')
 
     def user() -> str:
@@ -39,3 +39,4 @@ class start:
             return input(tag.session+'Сохраненных сессий не найдено.\nВведите имя для новой сессии\n:: ')
         
 modules_help = {}
+requirements = {}

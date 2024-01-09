@@ -44,15 +44,15 @@ def gpt(client: Client, message: Message):
                 completion = openai.ChatCompletion.create(model=engine, messages=[{"role": "user", "content": prompt}], temperature=0.9, max_tokens=3000)
                 reply = completion.choices[0]["message"]["content"].replace("'", "`")
                 reply = f'🤖: {reply}\n\n❓: {prompt}'
-                print('============REPLY============\n',reply,'\n/==========/REPLY/==========/')
+                #print('============REPLY============\n',reply,'\n/==========/REPLY/==========/')
                 replymore4k =  [reply[i:i+3000] for i in range(0, len(reply), 3000)]
-                print('============REPLY4K============\n',replymore4k,'\n/==========/REPLY4K/==========/')
+                #print('============REPLY4K============\n',replymore4k,'\n/==========/REPLY4K/==========/')
                 if replymore4k[0] == reply:
                     message.edit(reply)
                 else:
                     message.edit(replymore4k[0])
                     for chunk in replymore4k[1:]:
-                        print('============CHUNK============\n',chunk,'\n/==========/CHUNK/==========/')
+                        #print('============CHUNK============\n',chunk,'\n/==========/CHUNK/==========/')
                         client.send_message(message.chat.id, chunk)
             except Exception as e: message.edit(str(e)[:2000])
     else:

@@ -1,20 +1,21 @@
-from utils import default_imports
 import logging
 import platform
 from datetime import datetime
-startTime = datetime.now()    
+startTime = datetime.now()
 from pathlib import Path
 import os
 from pyrogram import Client, idle
-from utils import misc, default_imports, cfgmaster
+from utils import misc, cfgmaster
 from utils.scripts import start
 from utils.loader import import_module
 
-script_path = os.path.dirname(os.path.realpath(__file__))
-if script_path != os.getcwd():
-    os.chdir(script_path)
+#script_path = os.path.dirname(os.path.realpath(__file__))
+#if script_path != os.getcwd():
+#    os.chdir(script_path)
 
 start.init()
+
+from utils import log
 
 app = Client(
     name = start.user(),
@@ -27,10 +28,10 @@ app = Client(
 )
 
 async def main():
-    logging.basicConfig(level=logging.WARNING, format='%(asctime)s | %(message)s')
     #try:
     await cfgmaster.start(app)
     await app.start()
+    log.write.info("Main","Userbot starting")
     #except Exception as e:
      #   print(e)
       #  await asyncio.sleep(2)
@@ -38,8 +39,13 @@ async def main():
     
     success_modules = 0
     failed_modules = 0
+
     success_modules_list = []
     failed_modules_list = []
+
+    misc.user.me = await app.get_me()
+    me = misc.user.me
+    log.write.info('Main',f'Starting on account ID: {me.id} / {me.phone_number}')
 
     for path in Path('modules').rglob('*.py'):
         try:
@@ -47,15 +53,21 @@ async def main():
         except Exception as e:
             failed_modules += 1
             failed_modules_list.append(path.stem)
+            raise
         else:
+            log.write.info('imports.main',f'import {path.stem} success.')
             success_modules += 1
             success_modules_list.append(path.stem)
     if success_modules:
         print(f'Загружено {success_modules} модулей.\n\tСписок: {" ".join(success_modules_list)}')
+        log.write.info("Main", f'Loaded {success_modules} modules.\n\tList: {" ".join(success_modules_list)}')
     if failed_modules:
         print(f'Не удалось загрузить {failed_modules} модулей.\n\tСписок: {" ".join(failed_modules_list)}')
+        log.write.warn("Main", f'Not loaded {failed_modules} modules.\n\tList: {" ".join(failed_modules_list)}')
     
     print(f"{misc.userbot_name} {misc.userbot_version} запущен.")
+    log.write.info('Main', f"{misc.userbot_name} {misc.userbot_version} started")
+
     await idle()
     await app.stop()
 

