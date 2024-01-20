@@ -11,13 +11,16 @@ import os
 data = os.getenv('LOCALAPPDATA')
 from pyrogram.types import User
 
-userbot_version = '1.0 CLOSED DEVELOPER BUILD'
+userbot_version = '1.02 DEV'
 userbot_name = 'ModHash'
-session_path = data+'\\Mod'
+session_path = data+'\\Mod\\'
 config_path = data+'\\Mod\\cache\\settings.ini'
+cache_path = data+'\\Mod\\cache\\'
 log_path = f'{data}\\Mod\\logs\\{str(datetime.now()).rsplit(".")[0].replace(" ","_").replace(":","_")}_log.txt'
 wallet_path = data+'\\Mod\\wallet\\'
+claimed_tokens_path = wallet_path+'tokens.crypto'
 prefix = '!'
+icon = '.\\utils\\mod.png'
 
 api_id = 23441409
 api_hash = "fc2ebed7751be9bc29171b0072b10fed"

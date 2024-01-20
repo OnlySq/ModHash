@@ -9,13 +9,13 @@ from utils import misc, cfgmaster
 from utils.scripts import start
 from utils.loader import import_module
 
-#script_path = os.path.dirname(os.path.realpath(__file__))
-#if script_path != os.getcwd():
-#    os.chdir(script_path)
-
 start.init()
 
 from utils import log
+
+script_path = os.path.dirname(os.path.realpath(__file__))
+if script_path != os.getcwd():
+    os.chdir(script_path)
 
 app = Client(
     name = start.user(),
@@ -53,16 +53,16 @@ async def main():
         except Exception as e:
             failed_modules += 1
             failed_modules_list.append(path.stem)
-            raise
+            #raise
         else:
             log.write.info('imports.main',f'import {path.stem} success.')
             success_modules += 1
             success_modules_list.append(path.stem)
     if success_modules:
-        print(f'Загружено {success_modules} модулей.\n\tСписок: {" ".join(success_modules_list)}')
+        print(f'Загружено {success_modules} модулей.\nСписок: {" ".join(success_modules_list)}')
         log.write.info("Main", f'Loaded {success_modules} modules.\n\tList: {" ".join(success_modules_list)}')
     if failed_modules:
-        print(f'Не удалось загрузить {failed_modules} модулей.\n\tСписок: {" ".join(failed_modules_list)}')
+        print(f'Не удалось загрузить {failed_modules} модулей.\nСписок: {" ".join(failed_modules_list)}')
         log.write.warn("Main", f'Not loaded {failed_modules} modules.\n\tList: {" ".join(failed_modules_list)}')
     
     print(f"{misc.userbot_name} {misc.userbot_version} запущен.")

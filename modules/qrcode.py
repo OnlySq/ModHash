@@ -8,13 +8,11 @@ import qrcode
 
 module_name = 'QrCode Generator'
 
-qrpath = data+'Mod\\cache\\qr.png'
+qrpath = data+'\\Mod\\cache\\qr.png'
 
 # Code
 
 async def rphoto(client: Client, message: Message):
-    global sstat
-    sstat = sstat+1
     try:
         content = message.text.split(' ',1)[1]
         await message.delete()
@@ -22,18 +20,18 @@ async def rphoto(client: Client, message: Message):
         qc = qrcode.make(content, box_size=20, border=1)
         qc.save(qrpath)
 
-        await client.send_photo(message.chat.id, qrpath, 'Made with [Telehash](https://t.me/telehashdev)')
+        await client.send_photo(message.chat.id, qrpath, 'Made with <emoji id=5310129635848103696>✅</emoji>[ModHash](https://t.me/telehashdev)')
     except Exception as e:
-        await client.send_message(message.chat.id, 'QRCode error: '+str(Exception))
+        await client.send_message(message.chat.id, 'QRCode error: '+str(e))
 
 # End of code
 
 # MessageHandler(,filters.command('',prefix))
 handlers = [
-    MessageHandler(rphoto,filters.command('',prefix))
+    MessageHandler(rphoto,filters.command('qr',prefix))
 ]
 
 # "":"",
 modules_help[module_name] = {
-
+    "qr [text]":"Create QR and send it"
 }

@@ -5,7 +5,6 @@ from utils.misc import prefix
 from utils.scripts import modules_help
 from pyrogram.handlers import MessageHandler
 import random as r
-import os
 
 module_name = 'Old'
 

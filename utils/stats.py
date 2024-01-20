@@ -212,7 +212,7 @@ def print_wmic(part, dict_info):
         else:
             part += f'{synonyms[key]}: {dict_info[key]}\n'
     wmic_info += f'{part}\n'
-    return(part+'```')
+    return(part)
     
 
 
@@ -220,17 +220,17 @@ def get_system() -> str:
     global wmic_info
     result = ''
     if os_info := winreg_os():
-        result += print_wmic("\n```OS\n", os_info)
+        result += print_wmic("\n---- OS ----\n", os_info)
     if bios_info := bios_winreg():
-        result += print_wmic("\n```BIOS\n", bios_info)
+        result += print_wmic("\n---- BIOS ----\n", bios_info)
     if mb_info := motherboard_winreg():
-        result += print_wmic("\n```Motherboard\n", mb_info)
+        result += print_wmic("\n---- Motherboard ----\n", mb_info)
     if cpu_info := cpu_winreg():
-        result += print_wmic("\n```CPU\n", cpu_info)
+        result += print_wmic("\n---- CPU ----\n", cpu_info)
     if gpu_info := gpu_winreg():
-        result += print_wmic("\n```GPU\n", gpu_info)
+        result += print_wmic("\n---- GPU ----\n", gpu_info)
     if drive_info := hdd_ssd_winreg():
-        result += print_wmic("\n```Data\n", drive_info)
+        result += print_wmic("\n---- Data ----\n", drive_info)
     if nic_info := nic_winreg():
-        result += print_wmic("\n```WEB\n", nic_info)
+        result += print_wmic("\n---- WEB ----\n", nic_info)
     return result

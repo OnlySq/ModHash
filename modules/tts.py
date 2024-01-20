@@ -21,14 +21,14 @@ async def text_to_speech(client: Client, message: Message):
     except:
         text = message.reply_to_message.text
         rtt = 1
-    message.edit('Подождите...')
+    await message.edit('Подождите...')
     tts = gTTS(text, lang='ru', slow=False)
     tts.save(voicepath)
-    message.delete()
+    await message.delete()
     if rtt == 0:
-        client.send_voice(chat_id=message.chat.id, voice=voicepath, caption="TTS with [Telehash](https://t.me/telehashdev)")
+        await client.send_voice(chat_id=message.chat.id, voice=voicepath, caption="TTS with [ModHash](https://t.me/telehashdev)")
     elif rtt == 1:
-        client.send_voice(chat_id=message.chat.id, voice=voicepath, caption="TTS with [Telehash](https://t.me/telehashdev)", reply_to_message_id=message.reply_to_message.id)
+        await client.send_voice(chat_id=message.chat.id, voice=voicepath, caption="TTS with [ModHash](https://t.me/telehashdev)", reply_to_message_id=message.reply_to_message.id)
     os.remove(voicepath)
 
 # End of code
