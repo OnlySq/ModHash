@@ -20,7 +20,7 @@ log_path = f'{data}\\Mod\\logs\\{str(datetime.now()).rsplit(".")[0].replace(" ",
 wallet_path = data+'\\Mod\\wallet\\'
 claimed_tokens_path = wallet_path+'tokens.crypto'
 prefix = '!'
-icon = '.\\utils\\mod.png'
+icon = 'https://private-user-images.githubusercontent.com/155289158/298374589-a1c81646-688d-410d-9d02-adef32ec1094.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDU4MzIxMDAsIm5iZiI6MTcwNTgzMTgwMCwicGF0aCI6Ii8xNTUyODkxNTgvMjk4Mzc0NTg5LWExYzgxNjQ2LTY4OGQtNDEwZC05ZDAyLWFkZWYzMmVjMTA5NC5wbmc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwMTIxJTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDEyMVQxMDEwMDBaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT1mZGRmNDQ2ZTEyMDU3YWExNjc0Yjc2NmE3YTlhYjMyNDBiZGZmZWMxM2Q1MWI4NjVjMWI2ZWM1NzlmOGE1YTg4JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.9LkiuMbdVL5j2AfouDqv3fycCyk5pRHsxFc-JQsueCs'
 
 api_id = 23441409
 api_hash = "fc2ebed7751be9bc29171b0072b10fed"
