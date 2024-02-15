@@ -1,17 +1,19 @@
 '''
 This a "misc" template for your code
-To generate api ID and api HASH visit
-https://core.telegram.org/api/obtaining_api_id
-This file is restricted to get original NoBan APIs
+To generate api ID and api HASH visit: https://core.telegram.org/api/obtaining_api_id
+! This file is restricted to get original NoBan APIs
+
 For help with code PM: @NoBanOnlyZXC
+
 This file updated from "secret" file in Telehash
 '''
+
 from datetime import datetime
 import os
 data = os.getenv('LOCALAPPDATA')
 from pyrogram.types import User
 
-userbot_version = '1.02 DEV'
+userbot_version = '1.032 Beta'
 userbot_name = 'ModHash'
 session_path = data+'\\Mod\\'
 config_path = data+'\\Mod\\cache\\settings.ini'
@@ -27,8 +29,7 @@ api_hash = "fc2ebed7751be9bc29171b0072b10fed"
 
 dev = 5624858175
 devd = '@NoBanOnlyZXC'
-
-openai_key =  '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'
+openai_key = ''
 openweather_key = 'e2fed831b5dae85a421f0a31eb2784e6'
 ninja_api = 'wnI6EPljWjcuYV2QJxsb6A==YeQ98fSj9fDXDf5M'
 

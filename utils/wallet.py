@@ -1,8 +1,10 @@
 import cryptocode as cc
 from pyrogram.types import Message
-from .misc import user, wallet_path, claimed_tokens_path
+from .misc import user, wallet_path
 from . import log
 import os.path
+
+claimed_tokens_path = wallet_path+f'tokens_{user.me.id}.crypto'
 
 wallet_file = wallet_path+f'wallet_{user.me.id}.crypto'
 
@@ -100,6 +102,7 @@ def claim_give(message: Message) -> str:
     from_user = str(message.reply_to_message.from_user.id)
     to_user = str(message.from_user.id)
     token = message.reply_to_message.text.split('#')[1]
+    log.write.info('Wallet.claim',f'Trying to claim token {token}...')
     if not check_claimed_token(token):
         add_claimed_token(token)
         result = float(cc.decrypt(token,str(to_user+from_user)))
@@ -110,10 +113,13 @@ def claim_give(message: Message) -> str:
             add_balance(result)
             ClaimInfo.new_balance = wallet.balance
             message.reply_to_message.delete()
+            log.write.info('Wallet.claim',f'Token successfully claimed, bal: {ClaimInfo.old_balance} ⨝ -> {ClaimInfo.new_balance} ⨝')
             return ClaimInfo
         else:
-            raise GiveError('Wrong password/crypto')
+            log.write.warn('Wallet.claim',f'Error while claiming token {token}: WRONG PASSWORD & USER')
+            raise ClaimError('Wrong password/crypto')
     else:
+        log.write.warn('Wallet.claim',f'Token is activated yet')
         raise ClaimError('Token is activated yet')
         
 wallet.balance = read_balance() # ⨝

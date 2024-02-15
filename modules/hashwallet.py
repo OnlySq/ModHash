@@ -7,7 +7,7 @@ from pyrogram.handlers import MessageHandler
 import random
 from utils import wallet
 
-module_name = 'HashWallet 0.1'
+module_name = 'HashWallet'
 
 # Code
 
@@ -15,7 +15,7 @@ async def balance(client: Client, message: Message):
     await message.edit(f'<emoji id=5370685990367141494>💲</emoji> Ваш баланс: `{wallet.wallet.balance}`**⨝**')
 
 async def add_bal(client: Client, message: Message):
-    wallet.add_balance(float(random.randint(1,100)))
+    wallet.add_balance(float(random.randint(1,300)))
 
 async def give(client: Client, message: Message):
     split = message.text.split(' ',2)
@@ -59,7 +59,8 @@ handlers = [
 # "":"",
 modules_help[module_name] = {
     'bal / balance / b':'Show your balance',
-    'give [float] <pass>':'give your tokens to another user'
+    'give [float] <pass>':'Give your tokens to another user',
+    'claim (reply to ticket)':'Claim tokens'
 }
 
 requirements[module_name] = {

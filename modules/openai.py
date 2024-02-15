@@ -124,5 +124,6 @@ handlers = [
 
 modules_help[module_name] = {
     "v2t":"Voice to text with OpenAI",
-    "gpt":"Use ChatGPT online and for free | +allgpt / -allgpt"
+    "gpt":"Use ChatGPT | +allgpt / -allgpt",
+    'draw':"Use DALL-E from OpenAI"
 }

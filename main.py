@@ -1,4 +1,3 @@
-import logging
 import platform
 from datetime import datetime
 startTime = datetime.now()
@@ -27,15 +26,12 @@ app = Client(
     workdir = misc.session_path
 )
 
+os.system('cls')
+
 async def main():
-    #try:
     await cfgmaster.start(app)
     await app.start()
     log.write.info("Main","Userbot starting")
-    #except Exception as e:
-     #   print(e)
-      #  await asyncio.sleep(2)
-       # exit()
     
     success_modules = 0
     failed_modules = 0
@@ -45,7 +41,7 @@ async def main():
 
     misc.user.me = await app.get_me()
     me = misc.user.me
-    log.write.info('Main',f'Starting on account ID: {me.id} / {me.phone_number}')
+    log.write.info('Main',f'Starting on account: {me.first_name} {me.id} / {me.phone_number}')
 
     for path in Path('modules').rglob('*.py'):
         try:
@@ -58,6 +54,7 @@ async def main():
             log.write.info('imports.main',f'import {path.stem} success.')
             success_modules += 1
             success_modules_list.append(path.stem)
+    os.system('cls')
     if success_modules:
         print(f'Загружено {success_modules} модулей.\nСписок: {" ".join(success_modules_list)}')
         log.write.info("Main", f'Loaded {success_modules} modules.\n\tList: {" ".join(success_modules_list)}')

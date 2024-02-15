@@ -1,6 +1,32 @@
 import os, time
 from .misc import tag, folders, session_path
+from pyrogram.types import Message
 import msvcrt
+
+def get_file_id(message: Message) -> str | None:
+    reply = message.reply_to_message
+    if reply is not None:
+        if reply.audio:
+            file_id = reply.audio.file_id
+        elif reply.document:
+            file_id = reply.document.file_id
+        elif reply.photo:
+            file_id = reply.photo.file_id
+        elif reply.sticker:
+            file_id = reply.sticker.file_id
+        elif reply.video:
+            file_id = reply.video.file_id
+        elif reply.animation:
+            file_id = reply.animation.file_id
+        elif reply.voice:
+            file_id = reply.voice.file_id
+        elif reply.video_note:
+            file_id = reply.video_note.file_id
+        else:
+            file_id = None
+    else:
+        file_id = None
+    return file_id
 
 def get_input() -> int:
     if msvcrt.kbhit():
