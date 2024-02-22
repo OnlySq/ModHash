@@ -4,7 +4,7 @@ from utils.misc import prefix, userbot_name, userbot_version, icon, user
 from utils.scripts import modules_help, pretty_print_dict, get_file_id
 from utils.cfgmaster import cfg
 from pyrogram.handlers import MessageHandler
-import os, sys, importlib
+import os, sys, importlib, re
 from pathlib import Path
 module_name = 'System'
 
@@ -28,6 +28,18 @@ async def get(client: Client, message: Message):
         await message.edit(f"File ID: {file_id}")
     elif message.command[1] == 'pem_id':
         await message.edit(f'Premium emoji (<emoji id={message.entities[0].custom_emoji_id}>{message.command[2]}</emoji>) id: `{message.entities[0].custom_emoji_id}`')
+    elif message.command[1] == 'all':
+        await message.edit(str(message.reply_to_message)[:4000])
+        print(message.reply_to_message)
+    elif message.command[1] == 'rml':
+        await message.edit('Links from buttons:')
+        for links in message.reply_to_message.reply_markup.inline_keyboard[0]:
+            await client.send_message(message.chat.id, '@'+str(links.url.rsplit('/',1)[1]))
+        matches = re.findall(r'@\w+', message.reply_to_message.text)
+        if matches:
+            await client.send_message(message.chat.id, 'Links from text:')
+            for match in matches:
+                await client.send_message(message.chat.id, match)
 
 async def restart(client: Client, message: Message):
     for path in Path('modules').rglob('*.py'):
@@ -66,7 +78,7 @@ handlers = [
 # "":"",
 modules_help[module_name] = {
     "help [module]":"View all modules commands",
-    'get [file_id/pem_id]':"Get _ of message",
+    'get [file_id/pem_id/rml/all]':"Get _ of message",
     'restart':"Restart userbot",
     'set [sec] [key] [val]':"Set value to config",
     'read [sec] [key]':"Read value from config"
