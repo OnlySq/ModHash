@@ -35,7 +35,7 @@ async def text_to_speech(client: Client, message: Message):
 
 # MessageHandler(,filters.command('',prefix))
 handlers = [
-    MessageHandler(text_to_speech,filters.command('tts',prefix))
+    MessageHandler(text_to_speech,filters.command('tts',prefix) & filters.me)
 ]
 
 # "":"",

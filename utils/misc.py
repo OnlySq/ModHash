@@ -13,7 +13,7 @@ import os
 data = os.getenv('LOCALAPPDATA')
 from pyrogram.types import User
 
-userbot_version = '1.032 Beta'
+userbot_version = '1.033 Beta'
 userbot_name = 'ModHash'
 session_path = data+'\\Mod\\'
 config_path = data+'\\Mod\\cache\\settings.ini'
@@ -29,6 +29,7 @@ api_hash = "fc2ebed7751be9bc29171b0072b10fed"
 
 dev = 5624858175
 devd = '@NoBanOnlyZXC'
+google_api_key = 'AIzaSyAqDp9SgWaMFonVrkrzGwXhRJ_rNajLDbg'
 openai_key = ''
 openweather_key = 'e2fed831b5dae85a421f0a31eb2784e6'
 ninja_api = 'wnI6EPljWjcuYV2QJxsb6A==YeQ98fSj9fDXDf5M'
@@ -46,10 +47,6 @@ folders = [
     data+'\\Mod\\wallet'
     ]
 
-commands_stats = {
-    "success": 0,
-    "failure": 0
-}
-
 class user:
+    account: str
     me: User
